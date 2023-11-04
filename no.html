@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Tomygirl-Mae</title>
+
+	<style>
+		h2 {
+			padding-top: 70px;
+			font-size: 72px;
+			margin-bottom: 20px;
+		}
+
+		* {
+			padding: 0;
+			margin: 0;
+			outline: 0;
+		}
+
+		body {
+			height: 100vh;
+			width: 100vw;
+			text-align: center;
+			color: #333;
+			background: pink;
+			display: flex;
+			justify-content: center;
+
+		}
+
+		.body {
+			position: absolute;
+			top: 50%;
+			right: 10%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-top: 100px;
+		}
+
+		h2 {
+			animation: 1s blink linear infinite;
+			display: flex;
+			justify-content: center;
+		}
+
+		.birthdayCard {
+			position: relative;
+			width: 250px;
+			height: 350px;
+			cursor: pointer;
+			transform-style: preserve-3d;
+			transform: perspective(2500px);
+			transition: 1s;
+		}
+
+		.cardFront {
+			position: relative;
+			background-color: #fff;
+			width: 250px;
+			height: 350px;
+			overflow: hidden;
+			transform-origin: left;
+			box-shadow: inset 100px 20px 100px rgba(0, 0, 0, .2), 30px 0 50px rgba(0, 0, 0, 0.4);
+			transition: .6s;
+		}
+
+		.happy {
+			font-family: Tahoma, sans-serif;
+			text-align: center;
+			margin: 30px;
+			background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+			transition: .1s;
+		}
+
+		.balloons {
+			position: absolute;
+		}
+
+		.balloonOne,
+		.balloonTwo,
+		.balloonThree,
+		.balloonFour {
+			position: absolute;
+			width: 85px;
+			height: 95px;
+			border-radius: 50%;
+		}
+
+		.balloonOne {
+			background-color: rgb(239, 71, 111, 0.7);
+			left: -10px;
+			top: 50px;
+		}
+
+		.balloonTwo {
+			background-color: rgb(6, 214, 160, 0.7);
+			left: 50px;
+			top: 20px;
+		}
+
+		.balloonThree {
+			background-color: rgb(255, 209, 102, 0.7);
+			left: 110px;
+			top: 50px;
+		}
+
+		.balloonFour {
+			background-color: rgb(17, 138, 178, 0.7);
+			left: 170px;
+			top: 20px;
+		}
+
+		.balloonOne:before,
+		.balloonTwo:before,
+		.balloonThree:before,
+		.balloonFour:before {
+			content: "";
+			position: absolute;
+			width: 1px;
+			height: 155px;
+			background-color: #ffd166;
+			top: 95px;
+			left: 43px;
+		}
+
+		.balloonOne:after,
+		.balloonTwo:after,
+		.balloonThree:after,
+		.balloonFour:after {
+			content: "";
+			position: absolute;
+			border-right: 7px solid transparent;
+			border-left: 7px solid transparent;
+			top: 94px;
+			left: 37px;
+		}
+
+		.balloonOne:after {
+			border-bottom: 10px solid #ef476f;
+		}
+
+		.balloonTwo:after {
+			border-bottom: 10px solid #06d6a0;
+		}
+
+		.balloonThree:after {
+			border-bottom: 10px solid #ffd166;
+		}
+
+		.balloonFour:after {
+			border-bottom: 10px solid #118ab2;
+		}
+
+		.cardInside {
+			position: absolute;
+			background-color: #fff;
+			width: 250px;
+			height: 350px;
+			z-index: -1;
+			left: 0;
+			top: 0;
+			box-shadow: inset 100px 20px 100px rgba(0, 0, 0, 0.2);
+		}
+
+		p {
+			font-family: cursive;
+			margin: 15px 10px 10px 30px;
+			color: #333;
+		}
+
+		.name {
+			position: absolute;
+			left: 150px;
+			/* top: 200px; */
+			color: #333;
+			text-decoration: underline;
+		}
+
+		.back {
+			font-family: Tahoma, sans-serif;
+			color: #333;
+			text-align: center;
+			margin: 30px;
+			outline-color: #333;
+			outline-style: dashed;
+		}
+
+		.birthdayCard:hover {
+			transform: perspective(2500px) rotate(5deg);
+			box-shadow: inset 100px 20px 100px rgba(0, 0, 0, .2), 0 10px 100px rgba(0, 0, 0, 0.5);
+		}
+
+		.birthdayCard:hover .cardFront {
+			transform: rotateY(-160deg);
+		}
+
+		.birthdayCard:hover .happy {
+			visibility: hidden;
+		}
+
+		@keyframes blink {
+			0% {
+				color: white;
+			}
+
+			20% {
+				color: yellow;
+			}
+
+			40% {
+				color: greenyellow;
+			}
+
+			60% {
+				color: red;
+			}
+
+			80% {
+				color: hotpink;
+			}
+
+			100% {
+				color: blue;
+			}
+		}
+
+		.c-button {
+			position: absolute;
+			top: 130%;
+			left: 10%;
+			color: #000;
+			font-weight: 700;
+			font-size: 16px;
+			text-decoration: none;
+			padding: 0.9em 1.6em;
+			cursor: pointer;
+			display: inline-block;
+			vertical-align: middle;
+			position: relative;
+			z-index: 1;
+		}
+
+		.c-button--gooey {
+			color: #06c8d9;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			border: 4px solid #06c8d9;
+			border-radius: 0;
+			position: relative;
+			transition: all 700ms ease;
+			padding-bottom: 10px;
+		}
+
+		.c-button--gooey .c-button__blobs {
+			height: 100%;
+			filter: url(#goo);
+			overflow: hidden;
+			position: absolute;
+			top: 0;
+			left: 0;
+			bottom: -3px;
+			right: -1px;
+			z-index: -1;
+
+		}
+
+		.c-button--gooey .c-button__blobs div {
+			background-color: #06c8d9;
+			width: 34%;
+			height: 100%;
+			border-radius: 100%;
+			position: absolute;
+			transform: scale(1.4) translateY(125%) translateZ(0);
+			transition: all 700ms ease;
+		}
+
+		.c-button--gooey .c-button__blobs div:nth-child(1) {
+			left: -5%;
+		}
+
+		.c-button--gooey .c-button__blobs div:nth-child(2) {
+			left: 30%;
+			transition-delay: 60ms;
+		}
+
+		.c-button--gooey .c-button__blobs div:nth-child(3) {
+			left: 66%;
+			transition-delay: 25ms;
+		}
+
+		.c-button--gooey:hover {
+			color: #fff;
+		}
+
+		.c-button--gooey:hover .c-button__blobs div {
+			transform: scale(1.4) translateY(0) translateZ(0);
+		}
+
+		.card {
+			position: absolute;
+			top: 40%;
+			left: 10%;
+			width: 190px;
+			height: 120px;
+			padding: 0.5rem;
+			background: rgba(198, 198, 198, 0.34);
+			border-radius: 8px;
+			backdrop-filter: blur(5px);
+			border-bottom: 3px solid rgba(255, 255, 255, 0.440);
+			border-left: 2px rgba(255, 255, 255, 0.545) outset;
+			box-shadow: -40px 50px 30px rgba(0, 0, 0, 0.280);
+			transform: skewX(10deg);
+			transition: .4s;
+			overflow: hidden;
+			color: white;
+		}
+
+		.card:hover {
+			height: 800px;
+			transform: skew(0deg);
+		}
+
+		.align {
+			padding: 1rem;
+			display: flex;
+			flex-direction: row;
+			gap: 5px;
+			align-self: flex-start;
+		}
+
+		.red {
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			background-color: #ff605c;
+			box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.280);
+		}
+
+		.yellow {
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			background-color: #ffbd44;
+			box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.280);
+		}
+
+		.green {
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			background-color: #00ca4e;
+			box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.280);
+		}
+
+		.card h1 {
+			text-align: center;
+			margin: 1.3rem;
+			color: rgb(218, 244, 237);
+			text-shadow: -10px 5px 10px rgba(0, 0, 0, 0.573);
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+
+		<div class="card">
+			<div class="align">
+				<span class="red"></span>
+				<span class="yellow"></span>
+				<span class="green"></span>
+			</div>
+
+			<h1>to my girlfriend</h1>
+			<p>
+				To my girlfriend na maganda yuko na mag english hirap ehh basat allways remember na mahal na mahal kta
+				ket anong mangyari. kaw pinaka magandang babae para saakin
+				sorry minsan may manga kasalanan ako at minsan ako ung gumagawa ng dahilan bat tayu nag aaway pero
+				promise ko na hindeng hinde kta iiwan.
+				btw pindutin m ung button sa baba tapos wait ka lng happy monthsary mahal ko sorry kagabi iloveyou so
+				much
+				i miss u na po mwah mahal n mahal kta
+
+			</p>
+		</div>
+
+		<div class="yes">
+			<h2>Here is My First Part of my Gift</h2>
+
+			<video controls autoplay src="meow.mp4" width="500px" ; height="700px" ;></video>
+		</div>
+
+		<div class="rightcon">
+			<div class="body">
+				<div class="birthdayCard">
+					<div class="cardFront">
+						<h3 class="happy">HAPPY MONTHSARY!</h3>
+						<div class="balloons">
+							<div class="balloonOne"></div>
+							<div class="balloonTwo"></div>
+							<div class="balloonThree"></div>
+							<div class="balloonFour"></div>
+						</div>
+					</div>
+					<div class="cardInside">
+						<h3 class="back">HAPPY MOUNTHSARY MAHAL!</h3>
+						<p contenteditable="true">Dear best jowa na pangalan ai mae,</p>
+						<p contenteditable="true">Happy Birth day panget Salamat at allways ka paring
+							naanjan ket lagi tau nag aaway sana wag mo po ako iwan nag mamakaawa jc mwah
+						</p>
+						<p contenteditable="true" class="name">Pascual</p>
+					</div>
+				</div>
+			</div>
+
+			<a href="flower.html"><button class="c-button c-button--gooey"> Click Me!!!!
+					<div class="c-button__blobs">
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
+				</button>
+				<svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: block; height: 0; width: 0;">
+					<defs>
+						<filter id="goo">
+							<feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
+							<feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+								result="goo"></feColorMatrix>
+							<feBlend in="SourceGraphic" in2="goo"></feBlend>
+						</filter>
+					</defs>
+				</svg>
+			</a>
+
+		</div>
+
+	</div>
+
+
+
+
+</body>
+
+</html>
